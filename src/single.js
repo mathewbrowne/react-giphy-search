@@ -31,8 +31,11 @@ function GifDemo() {
           <Gif gif={gif} width={640} controls />
         </Col>
         <Col>
-        <h5 className="mb-3"><a target="blank" href={gif.url}><strong>{gif.title}</strong></a></h5>
 
+        {gif.title ?
+        <h5 className="mb-3"><a target="blank" href={gif.url}><strong>{gif.title}</strong></a></h5>
+        : null}
+        
         {gif.user ?
           <div className="mb-3">
             <a target="blank" href={gif.user.profile_url}>
