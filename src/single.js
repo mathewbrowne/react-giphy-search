@@ -12,11 +12,9 @@ import Table from 'react-bootstrap/Table';
 
 const giphyFetch = new GiphyFetch("sXpGFDGZs0Dv1mmNFvYaGUvYwKX0PWIh");
 
-
 function GifDemo() {
 
   const { id } = useParams();
-
   const [gif, setGif] = useState(null);
 
   useAsync(async () => {
@@ -35,17 +33,21 @@ function GifDemo() {
         <Col>
         <h5 className="mb-3"><a target="blank" href={gif.url}><strong>{gif.title}</strong></a></h5>
 
-        <div className="mb-3">
-          <a target="blank" href={gif.user.profile_url}>
-            <Image width={40} src={gif.user.avatar_url} roundedCircle className="me-1" />
-            <strong>{gif.user.display_name}</strong>
-          </a>
-        </div>
+        {gif.user ?
+          <div className="mb-3">
+            <a target="blank" href={gif.user.profile_url}>
+              <Image width={40} src={gif.user.avatar_url} roundedCircle className="me-1" />
+              <strong>{gif.user.display_name}</strong>
+            </a>
+          </div>
+        : null}
 
         <Table striped bordered size="sm">
+        <tbody>
           <tr><td>Width</td><td>{gif.images.original.width}</td></tr>
           <tr><td>Height</td><td>{gif.images.original.height}</td></tr>
           <tr><td>Frames</td><td>{gif.images.original.frames}</td></tr>
+        </tbody>
         </Table>
 
         </Col>
@@ -57,10 +59,10 @@ function GifDemo() {
 function SingleGif() {
 
   const { id } = useParams();
-
   return (
       <GifDemo id={id} />
   );
+
 }
 
 export default SingleGif;
