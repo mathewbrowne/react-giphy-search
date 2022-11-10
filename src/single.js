@@ -18,7 +18,7 @@ function GifDemo() {
   const [gif, setGif] = useState(null);
 
   useAsync(async () => {
-    const { data } = await giphyFetch.gif(id);
+    const { data } = await giphyFetch.gif( id, { type: 'video' } );
     setGif(data);
     console.log(data);
     console.log(id);
@@ -28,14 +28,14 @@ function GifDemo() {
     <Container className="justify-content-center mb-3">
       <Row>
         <Col>
-          <Gif gif={gif} width={640} controls />
+          <Gif gif={ gif } width={ 480 } />
         </Col>
         <Col>
 
         {gif.title ?
         <h5 className="mb-3"><a target="blank" href={gif.url}><strong>{gif.title}</strong></a></h5>
         : null}
-        
+
         {gif.user ?
           <div className="mb-3">
             <a target="blank" href={gif.user.profile_url}>
@@ -50,6 +50,7 @@ function GifDemo() {
           <tr><td>Width</td><td>{gif.images.original.width}</td></tr>
           <tr><td>Height</td><td>{gif.images.original.height}</td></tr>
           <tr><td>Frames</td><td>{gif.images.original.frames}</td></tr>
+          <tr><td>MP4</td><td><a target="blank" href={gif.images.original_mp4.mp4}>Link</a></td></tr>
         </tbody>
         </Table>
 
